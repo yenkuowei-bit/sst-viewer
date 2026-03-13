@@ -5,7 +5,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
-
+#好難
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QComboBox, QCheckBox, QLabel, QProgressBar)
 from PyQt5.QtCore import QThread, pyqtSignal, Qt

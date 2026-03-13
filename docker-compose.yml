@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  gui_app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: jma_sst_viewer
+    environment:
+      # Route X11 GUI outputs to the host.docker.internal standard gateway IP
+      # Assuming VcXsrv (Xming) is running on the Windows Host
+      - DISPLAY=host.docker.internal:0.0
+      - QT_QPA_PLATFORM=xcb
+    volumes:
+      # Mount the local folder into the container to retain download caches
+      # and easily modify the script locally without rebuilding the image
+      - ./:/app
