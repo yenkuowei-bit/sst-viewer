@@ -13,7 +13,7 @@ import streamlit as st
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="JMA HIMSST Viewer",
+    page_title="臺灣東部海域黑潮偵測系統",
     page_icon="🌊",
     layout="wide",
 )
@@ -155,7 +155,7 @@ def make_figure(
         if len(parts) >= 3 else header
     )
     ax.set_title(
-        f"JMA HIMSST  —  {title_date}  |  "
+        f"臺灣東部海域黑潮偵測系統  —  {title_date}  |  "
         f"{lon_min}°–{lon_max}°E / {lat_min}°–{lat_max}°N"
     )
 
@@ -279,8 +279,8 @@ def make_figure(
 
 # ── Streamlit UI ─────────────────────────────────────────────────────────────
 
-st.title("🌊 JMA HIMSST Viewer")
-st.caption("Japan Meteorological Agency — High-resolution Sea Surface Temperature (Pacific)")
+st.title("🌊 臺灣東部海域黑潮偵測系統")
+st.caption("資料來源：日本氣象廳（JMA）高解析度海表面溫度（HIMSST）· 農業部水產試驗所 漁海況研究小組")
 
 # ── Sidebar controls ──────────────────────────────────────────────────────────
 with st.sidebar:
