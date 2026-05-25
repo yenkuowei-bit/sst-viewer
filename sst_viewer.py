@@ -8,6 +8,7 @@ import json
 import matplotlib
 matplotlib.use('Agg')  # Non-interactive backend — safe for Streamlit Cloud
 import matplotlib.pyplot as plt
+from matplotlib import colors as mcolors
 import streamlit as st
 
 # ── Page config ─────────────────────────────────────────────────────────────
@@ -138,8 +139,11 @@ def make_figure(
     fig, ax = plt.subplots(figsize=(9, 7), tight_layout=True)
 
     extent = [100.0, 180.0, 0.0, 60.0]
+    band_step = 0.5
+    levels = np.arange(vmin, vmax + band_step, band_step)
+    norm = mcolors.BoundaryNorm(levels, ncolors=plt.get_cmap('RdYlBu_r').N)
     img = ax.imshow(data, extent=extent, origin='upper',
-                    cmap='jet', vmin=vmin, vmax=vmax)
+                    cmap='RdYlBu_r', norm=norm)
     ax.set_xlim(lon_min, lon_max)
     ax.set_ylim(lat_min, lat_max)
     ax.set_xlabel('Longitude (°E)')
@@ -179,7 +183,8 @@ def make_figure(
         lons = np.linspace(100.05, 179.95, 800)
         lats = np.linspace(59.95, 0.05, 600)
         X, Y = np.meshgrid(lons, lats)
-        cs = ax.contour(X, Y, data, colors='black', linewidths=0.5)
+        iso_levels = np.arange(np.floor(vmin), np.ceil(vmax) + 1, 1.0)
+        cs = ax.contour(X, Y, data, levels=iso_levels, colors='black', linewidths=0.8)
         ax.clabel(cs, inline=True, fontsize=7, fmt='%.0f°C')
 
     # ── Kuroshio ───────────────────────────────────────────────────────────
